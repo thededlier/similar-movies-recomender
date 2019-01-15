@@ -23,11 +23,11 @@ print('--- Similar Movies ---')
 print(similar_movies.sort_values(ascending=False)[:10])
 
 movie_stats = ratings.groupby('title').agg({ 'rating': [np.size, np.mean] })
-# Movies with greater than 125 ratings
-popular_movies = movie_stats['rating']['size'] >= 125
+# Movies with greater than 200 ratings
+popular_movies = movie_stats['rating']['size'] >= 200
 print('--- Popular Movies ---')
 print(movie_stats[popular_movies].sort_values([('rating', 'mean')], ascending=False)[:10])
 
 df = movie_stats[popular_movies].join(pd.DataFrame(similar_movies, columns=['similarity']))
 print('--- Most popular and similar movies ---')
-print(df.sort_values(['similarity'], ascending=False)[:10])
+print(df.sort_values(['similarity'], ascending=False)[:20])
